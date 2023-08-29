@@ -1,0 +1,65 @@
+@import url('bootstrap/dist/css/bootstrap.css');
+
+/* #region HEADER */
+#app_header {
+    background: linear-gradient(90deg, #672280 1.18%, #A626D3 100%);
+    height: 100px;
+
+    img {
+        height: 50px;
+    }
+}
+
+/* #endregion HEADER */
+
+/* #region MAIN */
+#app_main {
+    button {
+        background: linear-gradient(90deg, #672280 1.18%, #A626D3 100%);
+        border: 0;
+        cursor: pointer;
+
+        &:hover {
+            scale: 1.01;
+        }
+
+        &:active {
+            scale: 0.99;
+        }
+    }
+
+    .meme__text {
+        position: absolute;
+        width: 80%;
+        text-align: center;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 15px 0;
+        padding: 0 5px;
+        font-family: impact, sans-serif;
+        font-size: 2em;
+        text-transform: uppercase;
+        color: white;
+        letter-spacing: 1px;
+        text-shadow:
+            2px 2px 0 #000,
+            -2px -2px 0 #000,
+            2px -2px 0 #000,
+            -2px 2px 0 #000,
+            0 2px 0 #000,
+            2px 0 0 #000,
+            0 -2px 0 #000,
+            -2px 0 0 #000,
+            2px 2px 5px #000;
+    }
+
+    .meme__top {
+        top: 0;
+    }
+
+    .meme__bottom {
+        bottom: 0;
+    }
+}
+
+/* #endregion MAIN */
