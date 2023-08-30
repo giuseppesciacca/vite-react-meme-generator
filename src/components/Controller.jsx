@@ -5,11 +5,11 @@ export default function Controller(props) {
             <h6>Which text do you want to move?</h6>
 
             <div className="d-flex justify-content-center gap-3">
-                <div class="form-check">
+                <div className="form-check">
                     <input type="radio" className="form-check-input" name="topOrBottom" onClick={props.funcChoiceWichText} value="top" id='top' defaultChecked={props.texPosTop === 'top'} disabled={props.memeTextTopLength === 0 ? true : ''} />
                     <label htmlFor="top" className="form-check-label" >Top</label>
                 </div>
-                <div class="form-check">
+                <div className="form-check">
                     <input type="radio" className="form-check-input" name="topOrBottom" id="bottom" onClick={props.funcChoiceWichText} value="bottom" defaultChecked={props.texPosTop === 'bottom'} disabled={props.memeTextBottomLength === 0 ? true : ''} />
                     <label htmlFor="top" className="form-check-label">Bottom</label>
                 </div>

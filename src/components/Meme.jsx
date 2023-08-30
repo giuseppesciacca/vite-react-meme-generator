@@ -103,14 +103,17 @@ export default function Meme(props) {
 
     return (
         <>
-            <div id='meme' className='container position-relative'>
+            <div className='container position-relative'>
                 <button onClick={getRandomImage} className="btn_violet w-75 text-white p-2 rounded-2">Get a new meme image</button>
 
-                <img ref={memeRef} className='preview img-fluid text-center py-3' src={props.meme.randomImage} alt="" />
+                <div id='meme' ref={memeRef}>
+                    <img className='preview img-fluid text-center py-3' src={props.meme.randomImage} alt="" />
 
-                <p style={{ top: textPosition.text_top.top, left: textPosition.text_top.left }} className='position-absolute meme__top meme__text'>{props.meme.textTop} </p>
+                    <p style={{ top: textPosition.text_top.top, left: textPosition.text_top.left }} className='position-absolute meme__top meme__text w-auto'>{props.meme.textTop} </p>
 
-                <p style={{ bottom: textPosition.text_bottom.top, left: textPosition.text_bottom.left }} className='meme__bottom meme__text position-absolute'>{props.meme.textBottom} </p>
+                    <p style={{ bottom: textPosition.text_bottom.top, left: textPosition.text_bottom.left }} className='meme__bottom meme__text position-absolute w-auto'>{props.meme.textBottom} </p>
+                </div>
+                {/* /#meme */}
             </div>
 
             {(props.meme.textTop.length > 0 || props.meme.textBottom.length > 0) &&
