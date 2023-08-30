@@ -5,6 +5,7 @@
 Second small application I built while studying react.
 
 With the click of the button there is a change of the meme-image and it is possible to write text on it.
+It's possible move the text and download the meme.
 
 It's an exercise to familiarise myself with the React library:
 

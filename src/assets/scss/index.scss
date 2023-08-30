@@ -14,7 +14,12 @@
 
 /* #region MAIN */
 #app_main {
-    button {
+
+    img {
+        max-width: 400px;
+    }
+
+    .btn_violet {
         background: linear-gradient(90deg, #672280 1.18%, #A626D3 100%);
         border: 0;
         cursor: pointer;
@@ -28,16 +33,22 @@
         }
     }
 
+    .btn_controller {
+        padding: 1rem;
+        margin: 0.25rem;
+        border-radius: 0.25rem;
+        font-size: 1.5rem;
+    }
+
     .meme__text {
         position: absolute;
         width: 80%;
         text-align: center;
-        left: 50%;
         transform: translateX(-50%);
         margin: 15px 0;
         padding: 0 5px;
         font-family: impact, sans-serif;
-        font-size: 2em;
+        font-size: 1.5rem;
         text-transform: uppercase;
         color: white;
         letter-spacing: 1px;
@@ -53,12 +64,13 @@
             2px 2px 5px #000;
     }
 
-    .meme__top {
-        top: 0;
-    }
-
-    .meme__bottom {
-        bottom: 0;
+    @media screen and (min-width: 900px) {
+        #controller_text_container {
+            position: fixed;
+            bottom: 25%;
+            right: 20px;
+            z-index: 100;
+        }
     }
 }
 
