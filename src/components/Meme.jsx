@@ -142,7 +142,7 @@ export default function Meme() {
                     <Controller funcChoiceWichText={choiceTopOrBottomText} texPosTop={textPosition.topOrBottom} memeTextTopLength={meme.textTop.length} memeTextBottomLength={meme.textBottom.length} funMoveText={moveText} />
                 }
 
-                <button onClick={download}>Download meme</button>
+                <button className='btn_violet text-white rounded-2' onClick={download}>Download meme</button>
             </div>
         </main >
     )
