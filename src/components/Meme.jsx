@@ -1,47 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import InputText from './InputText';
 import Controller from './Controller';
 
-export default function Meme() {
-    const [meme, setMeme] = useState({
-        textTop: '',
-        textBottom: '',
-        randomImage: 'http://i.imgflip.com/1bij.jpg',
-    });
-
-    const [allMemeImages, setAllMemeImages] = useState([]);
-
-    useEffect(() => {
-        fetch('https://api.imgflip.com/get_memes')
-            .then(res => res.json())
-            .then(data => setAllMemeImages(data.data.memes))
-            .catch(err => console.error(err))
-    }, []);
-
-    /**
-     * onClick change Img on screen
-     */
-    function getRandomImage() {
-        const randomNumber = Math.floor(Math.random() * allMemeImages.length);
-
-        const newUrlImg = allMemeImages[randomNumber].url;
-
-        setMeme(prevMeme => ({
-            ...prevMeme,
-            randomImage: newUrlImg
-        }));
-    }
-
-    /**
-     * 
-     * @param {object} event 
-     */
-    function changeText(event) {
-        setMeme(prevMeme => ({
-            ...prevMeme,
-            [event.target.name]: event.target.value,
-        }));
-    }
+export default function Meme(props) {
 
     const [textPosition, setTextPosition] = useState({
         text_top: {
@@ -54,6 +14,29 @@ export default function Meme() {
         },
         topOrBottom: ''
     });
+
+    const [allMemeImages, setAllMemeImages] = useState([]);
+
+    useEffect(() => {
+        fetch('https://api.imgflip.com/get_memes')
+            .then(res => res.json())
+            .then(data => setAllMemeImages(data.data.memes))
+            .catch(err => console.error(err))
+    }, []);
+
+    /**
+    * onClick change Img on screen
+    */
+    function getRandomImage() {
+        const randomNumber = Math.floor(Math.random() * allMemeImages.length);
+
+        const newUrlImg = allMemeImages[randomNumber].url;
+
+        props.setMeme(prevMeme => ({
+            ...prevMeme,
+            randomImage: newUrlImg
+        }));
+    }
 
     /**
      * 
@@ -102,48 +85,39 @@ export default function Meme() {
         }
     }
 
+    const memeRef = useRef(null);
+
     /**
      * 
      */
-    function download() {
+    function downloadMeme() {
 
-        const previewArea = document.querySelector('.preview');
-
-        htmlToImage.toJpeg(previewArea)
+        htmlToImage.toJpeg(memeRef.current)
             .then(function (dataUrl) {
                 const link = document.createElement('a');
                 link.download = 'my-meme-name.jpeg';
                 link.href = dataUrl;
                 link.click();
             });
-
     }
 
-    const memeRef = useRef(null);
-
     return (
-        <main id="app_main" className="py-5">
-            <div className="container text-center form">
-                <div className="row row-cols-2 g-3 pb-3">
-                    <InputText memeTextTop={meme.textTop} memeTextBottom={meme.textBottom} funChangeText={changeText} />
-                </div>
-
+        <>
+            <div id='meme' className='container position-relative'>
                 <button onClick={getRandomImage} className="btn_violet w-75 text-white p-2 rounded-2">Get a new meme image</button>
 
-                <div ref={memeRef} id='meme' className=' position-relative'>
-                    <img className='preview img-fluid text-center py-3' src={meme.randomImage} alt="" />
+                <img ref={memeRef} className='preview img-fluid text-center py-3' src={props.meme.randomImage} alt="" />
 
-                    <p style={{ top: textPosition.text_top.top, left: textPosition.text_top.left }} className='position-absolute meme__top meme__text'>{meme.textTop} </p>
+                <p style={{ top: textPosition.text_top.top, left: textPosition.text_top.left }} className='position-absolute meme__top meme__text'>{props.meme.textTop} </p>
 
-                    <p style={{ bottom: textPosition.text_bottom.top, left: textPosition.text_bottom.left }} className='meme__bottom meme__text position-absolute'>{meme.textBottom} </p>
-                </div>
-
-                {(meme.textTop.length > 0 || meme.textBottom.length > 0) &&
-                    <Controller funcChoiceWichText={choiceTopOrBottomText} texPosTop={textPosition.topOrBottom} memeTextTopLength={meme.textTop.length} memeTextBottomLength={meme.textBottom.length} funMoveText={moveText} />
-                }
-
-                <button className='btn_violet text-white rounded-2' onClick={download}>Download meme</button>
+                <p style={{ bottom: textPosition.text_bottom.top, left: textPosition.text_bottom.left }} className='meme__bottom meme__text position-absolute'>{props.meme.textBottom} </p>
             </div>
-        </main >
+
+            {(props.meme.textTop.length > 0 || props.meme.textBottom.length > 0) &&
+                <Controller funcChoiceWichText={choiceTopOrBottomText} texPosTop={textPosition.topOrBottom} memeTextTopLength={props.meme.textTop.length} memeTextBottomLength={props.meme.textBottom.length} funMoveText={moveText} />
+            }
+
+            <button className='btn_violet text-white rounded-2' onClick={downloadMeme}>Download meme</button>
+        </>
     )
 }
