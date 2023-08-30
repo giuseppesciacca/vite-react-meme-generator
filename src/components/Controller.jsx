@@ -2,7 +2,7 @@ export default function Controller(props) {
 
     return (
         <div id='controller_text_container'>
-            <p>Wich text you wanna move?</p>
+            <p>Which text do you want to move?</p>
 
             <input type="radio" name="topOrBottom" onClick={props.funcChoiceWichText} value="top" id='top' defaultChecked={props.texPosTop === 'top'} disabled={props.memeTextTopLength === 0 ? true : ''} />
             <label htmlFor="top" className="me-3" >Top</label>
