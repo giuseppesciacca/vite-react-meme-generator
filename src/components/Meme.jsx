@@ -2,26 +2,27 @@ import { useState, useEffect, useRef } from 'react';
 import Controller from './Controller';
 
 export default function Meme(props) {
-
-    const [textPosition, setTextPosition] = useState({
-        text_top: {
-            top: 0,
-            left: 0
-        },
-        text_bottom: {
-            top: 0,
-            left: 0
-        },
-        topOrBottom: ''
-    });
-
     const [allMemeImages, setAllMemeImages] = useState([]);
 
+    /**
+     * populating array allMemeImages
+     */
     useEffect(() => {
-        fetch('https://api.imgflip.com/get_memes')
-            .then(res => res.json())
-            .then(data => setAllMemeImages(data.data.memes))
-            .catch(err => console.error(err))
+        let ignore = false;
+        async function getMemes() {
+            const res = await fetch("https://api.imgflip.com/get_memes")
+            const data = await res.json()
+            if (!ignore) {
+                setAllMemeImages(data.data.memes);
+            }
+        };
+
+        getMemes();
+
+        return () => {
+            ignore = true;
+        };
+
     }, []);
 
     /**
@@ -37,6 +38,18 @@ export default function Meme(props) {
             randomImage: newUrlImg
         }));
     }
+
+    const [textPosition, setTextPosition] = useState({
+        text_top: {
+            top: 0,
+            left: 0
+        },
+        text_bottom: {
+            top: 0,
+            left: 0
+        },
+        topOrBottom: ''
+    });
 
     /**
      * 
