@@ -1,8 +1,12 @@
 @import url('bootstrap/dist/css/bootstrap.css');
 
+body {
+    background-color: #1e1e1e1e;
+}
+
 /* #region HEADER */
 #app_header {
-    background: linear-gradient(90deg, #672280 1.18%, #A626D3 100%);
+    background: #120945;
     height: 100px;
 
     img {
@@ -16,9 +20,16 @@
 #app_main {
 
     min-height: calc(100vh - 100px - 80px);
+    max-width: 410px;
+    margin: auto;
+
+    #meme {
+        max-height: 500px;
+        aspect-ratio: 4 / 3;
+    }
 
     img {
-        max-width: 400px;
+        object-fit: contain;
     }
 
     .btn_violet {
@@ -80,7 +91,7 @@
 
 /* #region FOOTER */
 #app_footer {
-    background: linear-gradient(90deg, #672280 1.18%, #A626D3 100%);
+    background: #120945;
     height: 80px;
 }
 

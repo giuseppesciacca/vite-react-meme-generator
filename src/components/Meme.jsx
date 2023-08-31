@@ -117,10 +117,10 @@ export default function Meme(props) {
     return (
         <>
             <div className='container position-relative'>
-                <button onClick={getRandomImage} className="btn_violet w-75 text-white p-2 rounded-2">Get a new meme image</button>
+                <button onClick={getRandomImage} className="btn_violet w-75 text-white p-2 rounded-2 mb-3">Get a new meme image</button>
 
-                <div id='meme' ref={memeRef}>
-                    <img className='preview img-fluid text-center py-3' src={props.meme.randomImage} alt="" />
+                <div id='meme' ref={memeRef} className='mb-3'>
+                    <img className='preview img-fluid text-center' src={props.meme.randomImage} alt="" />
 
                     <p style={{ top: textPosition.text_top.top, left: textPosition.text_top.left }} className='position-absolute meme__top meme__text w-auto'>{props.meme.textTop} </p>
 
